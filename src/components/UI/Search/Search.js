@@ -1,16 +1,15 @@
 import React from 'react';
 
-import './Search.css';
+import classes from './Search.css';
 
 const search = (props) => {    
-
         return (
-            <div className=".mount-point">
-            <input type="text" placeholder="Search" onChange={(e) => props.filterList(e)}/>
-            <List items={props.items} />
+            <div className={classes.Container}>
+              <input type="text" placeholder="Search" onChange={(e) => props.filterList(e)}/>
+              <List items={props.items} />
             </div>
         )
-    
+        
 }
 
 const List = (props) => {

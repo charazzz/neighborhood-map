@@ -15,7 +15,7 @@ class Layout extends PureComponent {
         markers: [],
         isMarkerShown: false,
         isMarkerClicked: null,
-        query: 'sushi',
+        query: 'coffee',
         index: null,
         items: []
     }
@@ -83,7 +83,7 @@ class Layout extends PureComponent {
     }
 
     //Function for filtering the sidebar's list
-    filterList(e) {
+    filterList = (e) => {
         var updatedList = this.state.markers.map(m => {
             return m.name
         });

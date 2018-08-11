@@ -1,34 +1,29 @@
-body {
-    background: #e1e3de;
-  }
-  
-  .mount-point {
-    padding: 60px;
-    max-width: 800px;
-    margin: auto;
-  }
-    
-    .mount-point input {
-      line-height: 2;
-      font-size: 18px;
-      height: auto;
-      padding-left: 20px;
-    }
-    
-    ul {
-      margin: 0;
-    }
-    
-    ul li {
-      list-style: none;
-      border: 1px solid #ccc;
-      margin-top: -1px;
-      line-height: 2;
-      padding: 5px 20px;
-      background: white;
-    }
-      
-    
-    
-  
-  
+.Container {
+  max-width: 220px;
+}
+
+.Container input {
+  line-height: 2;
+  font-size: 12px;
+  width: 220px;
+  padding-left: 3px;
+}
+
+ul {
+  display: inline;
+}
+
+ul li {
+  list-style: none;
+  border: 1px solid #ccc;
+  margin-top: -1px;
+  padding-left: 3px;
+  line-height: 2;
+  background: white;
+  font-size: 12px;
+  width: 220px;
+}
+
+
+
+
