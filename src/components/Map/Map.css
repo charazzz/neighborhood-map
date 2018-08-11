@@ -1,0 +1,19 @@
+.Map {
+    border: 1px solid black;
+}
+
+.Map h1 {
+    color: blueviolet;
+}
+
+.MapContainer {
+    position: absolute;
+    right: 0;
+    left: 0;
+    height: 90%;
+    width: 100%;
+    bottom: 0;
+    z-index: -1
+}
+
+
