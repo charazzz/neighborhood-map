@@ -1,11 +1,11 @@
 import React from 'react';
 
-import earthLogo from '../../assets/pictures/planet-earth.png';
+import placeholderLogo from '../../assets/pictures/placeholder.png';
 import classes from './Logo.css';
 
 const logo = (props) => (
     <div className={classes.Logo} style={{height: props.height}}>
-        <img src={earthLogo} alt="MyPlaces" />
+        <img src={placeholderLogo} alt="MyPlaces" />
     </div>
 );
 

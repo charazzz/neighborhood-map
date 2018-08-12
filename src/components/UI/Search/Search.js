@@ -3,23 +3,17 @@ import React from 'react';
 import classes from './Search.css';
 
 const search = (props) => {    
-        return (
-            <div className={classes.Container}>
-              <input type="text" placeholder="Search" onChange={(e) => props.filterList(e)}/>
-              <List items={props.items} />
-            </div>
-        )
-        
-}
-
-const List = (props) => {
-      return (
-        <ul>
+  return (
+    <div className={classes.Container}>
+      <input type="text" placeholder="Search" onChange={(e) => props.filterListHandler(e)}/>
+      <ul>
         {props.items.map((item, i) => {
-            return <li key={i}>{item}</li>
-          })}
-        </ul>
-      )  
-    }
+            return <li key={i} onClick={() => props.listItemClickedHandler(i)}>{item}</li>
+        })}
+      </ul>
+    </div>
+  )
+  
+}
 
 export default search;

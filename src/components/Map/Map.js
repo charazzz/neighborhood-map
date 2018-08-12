@@ -2,6 +2,10 @@ import React from 'react';
 import { compose, withProps } from 'recompose';
 import { withGoogleMap, GoogleMap, withScriptjs, Marker, InfoWindow } from 'react-google-maps';
 
+// import coffee from '../../assets/pictures/coffee.svg';
+// import pizza from '../../assets/pictures/pizza.svg';
+// import movie from '../../assets/pictures/movie.svg';
+// import sushi from '../../assets/pictures/sushi.svg';
 
 import classes from './Map.css';
 
@@ -26,18 +30,17 @@ const Map = compose(
         return (
             <Marker
             key={marker.id}
-            onClick={() => props.openInfo(i)}
+            onClick={() => props.openInfo(i) && props.fetchPhotosHandler}
             position={marker.position}
-            //label={(i+1).toString()}
-            animation={props.index === i ? props.google.maps.Animation.BOUNCE :  props.google.maps.Animation.DROP}
-            //defaultAnimation={props.google.maps.Animation.DROP}
-            >
+            icon={marker.icon ? marker.icon : null}
+            animation={(props.index === i || props.name === marker.name) ? props.google.maps.Animation.BOUNCE :  props.google.maps.Animation.DROP}>
             {props.index === i &&
               <InfoWindow
               onCloseClick={props.openInfo}>
-                    <div>
+                    <div className={classes.InfoWindow}>
+                        <img src={props.pics[i]} alt={props.pics[i]}/>
                         <h5>
-                            {i} {marker.name}
+                            {marker.name}
                         </h5>
                         <h5>
                             {marker.address}
