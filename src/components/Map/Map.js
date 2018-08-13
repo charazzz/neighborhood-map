@@ -25,9 +25,9 @@ const Map = compose(
     
     defaultCenter = { { lat: 38.021294, lng: 23.798670 } }
     defaultZoom = { 13 }>
-    {props.isMarkerShown && props.markers.map((marker, i) => {
-
+    {props.isMarkerShown && props.items.map((marker, i) => {
         return (
+            
             <Marker
             key={marker.id}
             onClick={() => props.openInfo(i) && props.fetchPhotosHandler}
@@ -38,7 +38,7 @@ const Map = compose(
               <InfoWindow
               onCloseClick={props.openInfo}>
                     <div className={classes.InfoWindow}>
-                        <img src={props.pics[i]} alt={marker.name  + ' image'}/>
+                        <img src={props.pics[i]} alt={marker.name  + ' image' }/>
                         <h5>
                             {marker.name}
                         </h5>
@@ -48,7 +48,7 @@ const Map = compose(
                     </div>
               </InfoWindow>}
             </Marker>
-        )
+        ) 
     })}
     </GoogleMap>
     </div>

@@ -15,7 +15,7 @@ class Layout extends PureComponent {
         markers: [],
         items: [],
         pics: [],
-        links: [],
+        filteredMarkers: [],
         isMarkerShown: false,
         isMarkerClicked: null,
         query: 'restaurant',
@@ -33,7 +33,6 @@ class Layout extends PureComponent {
         .then( res => res.json() )
         .then(res => { 
             const venues = res.response.venues;
-            this.setState({ venues })
             
             let markers = venues.map(v => {
                 let attachedAddress = [v.location.address, v.location.city];
@@ -51,12 +50,8 @@ class Layout extends PureComponent {
                 }
             })
             
-            this.setState({ markers })
+            this.setState({ markers, items: markers })
             
-            let items = markers.map(m => {
-                return m.name
-            })
-            this.setState({ items })
             this.fetchPics();
         })        
         .catch(error => {
@@ -103,7 +98,7 @@ class Layout extends PureComponent {
     //SideDrawer Open & Close Handlers
     sideDrawerToggleHandler = () => {
         this.setState( ( prevState ) => {
-            return { showSideDrawer: !prevState.showSideDrawer };
+            return { showSideDrawer: !prevState.showSideDrawer, index: null };
         } );
     }
     
@@ -113,15 +108,16 @@ class Layout extends PureComponent {
     
     //Function for filtering the sidebar's list
     filterListHandler = (e) => {
-        let updatedMarkers = this.state.markers.map(m => {
-            return m.name
-        });
-        
-        updatedMarkers = updatedMarkers.filter(item => {
-            return item.toLowerCase().search(
-                e.target.value.toLowerCase()) !== -1;
-            });
-            this.setState({items: updatedMarkers});
+        let loggedMarkers = [];
+        let updatedMarkers = this.state.markers.map(marker => marker.name);
+
+        updatedMarkers = updatedMarkers.filter(marker => marker.toLowerCase().search(e.target.value.toLowerCase()) !== -1)
+        this.state.markers.map(marker => {
+            if (updatedMarkers.includes(marker.name)) {
+                return loggedMarkers.push(marker);
+            }
+        })
+        this.setState({items: loggedMarkers});
         }
         
         //- When a list item is clicked find the relevant marker and make it animate - Handler
@@ -152,6 +148,8 @@ class Layout extends PureComponent {
                     isMarkerShown={this.state.isMarkerShown}
                     openInfo={this.toggleInfoHandler}
                     markers={this.state.markers}
+                    update={this.state.update}
+                    items={this.state.items}
                     pics={this.state.pics}
                     index={this.state.index}
                     google={google}
