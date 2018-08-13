@@ -5,6 +5,7 @@ import Map from '../../components/Map/Map';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 import Search from '../../components/UI/Search/Search';
+import NoImage from '../../assets/pictures/NoImage.png';
 
 import classes from './Layout.css';
 
@@ -14,9 +15,10 @@ class Layout extends PureComponent {
         markers: [],
         items: [],
         pics: [],
+        links: [],
         isMarkerShown: false,
         isMarkerClicked: null,
-        query: 'sushi',
+        query: 'restaurant',
         index: null
     }
     
@@ -29,10 +31,9 @@ class Layout extends PureComponent {
     init = () => {
         fetch('https://api.foursquare.com/v2/venues/search?ll=38.021294,%2023.798670&query=' + this.state.query + '&v=20150214&m=foursquare&client_secret=KVY52L0NEAPDUP2SKHEKGTA2NHFXIW2K0Z2WJ5RWLC1JBA5R&client_id=I3RA2YZX0YFD11IP3G4IVR4EXQDSIRZSNYECRH1KZIB1M4FN')
         .then( res => res.json() )
-        .then(res => {   
-            const venues = res.response.venues.slice(20, 30);
+        .then(res => { 
+            const venues = res.response.venues;
             this.setState({ venues })
-            console.log(venues)
             
             let markers = venues.map(v => {
                 let attachedAddress = [v.location.address, v.location.city];
@@ -59,7 +60,7 @@ class Layout extends PureComponent {
             this.fetchPics();
         })        
         .catch(error => {
-            console.log(error);
+            alert('Sorry for the inconvenience. The following error has occurred: ' + error);
         });        
     }
     
@@ -73,12 +74,15 @@ class Layout extends PureComponent {
             .then(res => {
                 let prefix = res.response.photos.items[0] ? res.response.photos.items[0].prefix : null;
                 let suffix = res.response.photos.items[0] ? res.response.photos.items[0].suffix : null;
-                let pic = prefix + '100x100' + suffix
+                let pic = prefix ? prefix + '100x100' + suffix : NoImage;
                 return pics.push(pic);
             })
             return pics;
         })
         this.setState({ pics })
+        // .catch(error => {
+        //     console.log(error);
+        // }); 
     }
     
     //Delay Markers so that the API info is fetched
@@ -101,7 +105,6 @@ class Layout extends PureComponent {
         this.setState( ( prevState ) => {
             return { showSideDrawer: !prevState.showSideDrawer };
         } );
-        console.log(this.state.markers)
     }
     
     sideDrawerClosedHandler = () => {
@@ -126,10 +129,6 @@ class Layout extends PureComponent {
             this.setState(prevState => {
                 return { isMarkerClicked: !prevState.isMarkerClicked, index: i, showSideDrawer: false };
             } );
-        }
-        
-        fetchPhotosHandler = () => {
-            
         }
         
         render () {

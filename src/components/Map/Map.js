@@ -33,12 +33,12 @@ const Map = compose(
             onClick={() => props.openInfo(i) && props.fetchPhotosHandler}
             position={marker.position}
             icon={marker.icon ? marker.icon : null}
-            animation={(props.index === i || props.name === marker.name) ? props.google.maps.Animation.BOUNCE :  props.google.maps.Animation.DROP}>
+            animation={props.index === i ? props.google.maps.Animation.BOUNCE :  props.google.maps.Animation.DROP}>
             {props.index === i &&
               <InfoWindow
               onCloseClick={props.openInfo}>
                     <div className={classes.InfoWindow}>
-                        <img src={props.pics[i]} alt={props.pics[i]}/>
+                        <img src={props.pics[i]} alt={marker.name  + ' image'}/>
                         <h5>
                             {marker.name}
                         </h5>
