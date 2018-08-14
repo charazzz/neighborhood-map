@@ -4,7 +4,7 @@ import placeholderLogo from '../../assets/pictures/placeholder.png';
 import classes from './Logo.css';
 
 const logo = (props) => (
-    <div className={classes.Logo} style={{height: props.height}}>
+    <div className={classes.Logo}>
         <img src={placeholderLogo} alt="MyPlaces" />
     </div>
 );
