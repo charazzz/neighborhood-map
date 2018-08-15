@@ -36,6 +36,7 @@
     "react": "^16.4.2",
     "react-dev-utils": "^5.0.1",
     "react-dom": "^16.4.2",
+    "react-focus-lock": "^1.11.2",
     "react-foursquare": "^1.0.3",
     "react-google-maps": "^9.4.5",
     "react-native-foursquare-api": "0.0.4",

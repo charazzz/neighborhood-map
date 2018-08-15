@@ -24,9 +24,9 @@ class Layout extends PureComponent {
     
     componentDidMount() {
         this.init();
-        this.delayedShowMarker();    
+        this.delayedShowMarker();   
     }
-
+    
     //**-------------------Main API Request Functions----------------**//
     //Initialize the app by fetching the venues and their info
     init = () => {
@@ -57,33 +57,30 @@ class Layout extends PureComponent {
             this.fetchPics();
         })        
         .catch(error => {
-            //alert('Sorry for the inconvenience. Can\'t fetch data');
-            console.log(error)
+            alert('Sorry for the inconvenience. Can\'t fetch data. Error: ' + error);
         });     
-        
     }
     
     //Fetch the pictures of the venues 
     fetchPics = () => {
-        let pics=[];
-        
+        let pic;
         this.state.markers.map(m => {
             fetch('https://api.foursquare.com/v2/venues/' + m.id + '/photos?&oauth_token=MCDZOB502YQJVGZNO5UOAHC2BQLL3EFADLA0BZQEEJBOD1TQ&v=20180812')
             .then(res => res.json())
             .then(res => {
                 let prefix = res.response.photos.items[0] ? res.response.photos.items[0].prefix : null;
                 let suffix = res.response.photos.items[0] ? res.response.photos.items[0].suffix : null;
-                let pic = prefix ? prefix + '100x100' + suffix : NoImage;
-                return pics.push(pic);
-            })
+                pic = prefix ? prefix + '100x100' + suffix : NoImage;
+                return pic;
+                })
             .catch(error => {
                 //alert('Sorry for the inconvenience. Can\'t fetch photos');
                 console.log(error)
             });
-            return this.setState({ pics })
-        })         
+            return m.pic = pic;
+        })    
     }//**-------------------Main API Request Functions----------------**//
-
+    
     
     //------Delay Markers so that the API info is fetched Handler------//
     delayedShowMarker = () => {
@@ -91,7 +88,7 @@ class Layout extends PureComponent {
             this.setState({ isMarkerShown: true })
         }, 3000)
     }//------Delay Markers so that the API info is fetched Handler------//
-
+    
     
     //--------InfoWindow Toggle Handler----------//
     toggleInfoHandler = (i) => {
@@ -101,33 +98,34 @@ class Layout extends PureComponent {
         this.delayedShowMarker();
     } //--------InfoWindow Toggle Handler----------//
     
-
+    
     //-----------SideDrawer Open & Close Handlers-------------//
     sideDrawerToggleHandler = () => {
-          this.setState( ( prevState ) => {
+        this.setState( ( prevState ) => {
             return { showSideDrawer: !prevState.showSideDrawer, index: null };
         } );
-
+        
         const searchInput = document.querySelector('#searchInput');
         searchInput.focus();
     }
     
     sideDrawerClosedHandler = () => {
         this.setState( { showSideDrawer: false } );
-
+        
         const selectCategory = document.querySelector('#selectCategory');
         selectCategory.focus();
     }//-----------SideDrawer Open & Close Handlers-------------//
-
-
+    
+    
     //--------SideBar's Search Handlers----------//
     //Function for filtering the sidebar's list and markers simultaneously upon user's typing
     filterListHandler = (e) => {
         let loggedMarkers = [];
         let updatedMarkers = this.state.markers.map(marker => marker.name);
         
-        //filter the user's input and then, if it is included in the marker's array, update
-        updatedMarkers = updatedMarkers.filter(marker => marker.toLowerCase().search(e.target.value.toLowerCase()) !== -1)
+        //filter the user's input and then, if it is included in the main/marker's array, update
+        updatedMarkers = updatedMarkers.filter(marker => 
+            marker.toLowerCase().search(e.target.value.toLowerCase()) !== -1)
         this.state.markers.map(marker => {
             if (updatedMarkers.includes(marker.name)) {
                 return loggedMarkers.push(marker);
@@ -143,11 +141,11 @@ class Layout extends PureComponent {
         } );
     }//--------SideBar's Search Handlers----------//
     
-
+    
     //------Update venue list and markers upon user's category selection-------//
     queryHandler = (e) => {
         let loggedMarkers = [];
-
+        
         if (e === 'All') {
             this.setState({items: this.state.markers});
         } else {
@@ -160,47 +158,47 @@ class Layout extends PureComponent {
             this.setState({items: loggedMarkers});
         }
     }//------Update venue list and markers upon user's category selection-------//
-
+    
     //-------Skip to main button-Focus Fuunction----------//
     mainContentBtnFocus = () => {
-            const mainBtnCnt = document.querySelector('#mainBtnCnt');
-            mainBtnCnt.focus();
+        const mainBtnCnt = document.querySelector('#mainBtnCnt');
+        mainBtnCnt.focus();
     }//-------Skip to main button-Focus Fuunction----------//
+    
     
     render () {
         const google = window.google
         
         return (
             <Auxiliary>
-            <Toolbar
-            drawerToggleClicked={this.sideDrawerToggleHandler}
-            focus={this.mainContentBtnFocus}
-            />
-            <SideDrawer
-            open={this.state.showSideDrawer}
-            closed={this.sideDrawerClosedHandler} >
-            {this.state.isMarkerShown && this.state.items &&
-                <Search
-                items={this.state.items}
-                filterListHandler={this.filterListHandler}
-                listItemClickedHandler={this.listItemClickedHandler}
-                sideDrawerClosedHandler={this.sideDrawerClosedHandler}
-                /> }
-                </SideDrawer>
-                <main className={classes.Content}>
-                <Map
-                isMarkerShown={this.state.isMarkerShown}
-                openInfo={this.toggleInfoHandler}
-                items={this.state.items}
-                pics={this.state.pics}
-                index={this.state.index}
-                google={google}
+                <Toolbar
+                sideDrawerToggleHandler={this.sideDrawerToggleHandler}
+                focus={this.mainContentBtnFocus}
                 />
-                </main>
                 <QueryInput
                 queryHandler={this.queryHandler}
                 focus={this.mainContentBtnFocus}
                 />
+                <SideDrawer
+                    open={this.state.showSideDrawer}
+                    closed={this.sideDrawerClosedHandler} >
+                    {this.state.isMarkerShown && this.state.items &&
+                    <Search
+                    items={this.state.items}
+                    filterListHandler={this.filterListHandler}
+                    listItemClickedHandler={this.listItemClickedHandler}
+                    sideDrawerClosedHandler={this.sideDrawerClosedHandler}
+                    /> }
+                </SideDrawer>
+                <main className={classes.Content}>
+                    <Map
+                        isMarkerShown={this.state.isMarkerShown}
+                        openInfo={this.toggleInfoHandler}
+                        items={this.state.items}
+                        index={this.state.index}
+                        google={google}
+                    />
+                </main>
                 </Auxiliary>
             )
         }

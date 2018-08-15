@@ -7,10 +7,12 @@ import Title from './Title/Title';
 import classes from './Toolbar.css';
 
 const toolbar = ( props ) => (
-    <header className={classes.Toolbar}>
-        <DrawerToggle clicked={props.drawerToggleClicked} />
+    <header tabIndex='-1' className={classes.Toolbar}>
+        <DrawerToggle 
+        clicked={props.sideDrawerToggleHandler}
+        />
         <Title focus={props.focus}/>
-        <div className={classes.Logo}>
+        <div tabIndex='-1' className={classes.Logo}>
             <Logo />
         </div>
     </header>

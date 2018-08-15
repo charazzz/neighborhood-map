@@ -13,12 +13,18 @@
 }
 
 .InfoWindow {
+    width: auto;
     max-width: 120px;
 }
 
 .InfoWindow h5 {
-    color: blue;
+    color: #106197;
     font-size: 12px;
+    font-family: cursive;
+}
+
+.InfoWindow img {
+    width: 100%;
 }
 
 

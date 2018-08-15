@@ -4,8 +4,9 @@
 }
 
 .Title h1 {
-    font-size: 32px;
+    font-size: 16px;
     display: inline;
+    text-transform: uppercase;
 }
 
 .Title a {
@@ -14,4 +15,23 @@
     clip: rect(1px, 1px, 1px, 1px);
     font-size: 0;
     display: inline;
+}
+
+/*--------------Media Queries---------------*/
+@media (min-width: 450px) {
+    .Title h1 {
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 750px) {
+    .Title h1 {
+        font-size: 24px;
+    }
+}
+
+@media (min-width: 1000px) {
+    .Title h1 {
+        font-size: 30px;
+    }
 }

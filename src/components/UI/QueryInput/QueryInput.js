@@ -4,8 +4,8 @@ import classes from './QueryInput.css';
 
 const queryInput = (props) => {
         return (
-            <form className={classes.QueryForm}>
-                <label htmlFor='selectCategory' className={classes.QueryLabel}>Select Category of Venue:
+            <form tabIndex='-1' className={classes.QueryForm}>
+                <label tabIndex='-1' htmlFor='selectCategory' className={classes.QueryLabel}>Select Category of Venue:
                     <select tabIndex='0' id='selectCategory' className={classes.QuerySelect} onChange={(e) => props.queryHandler(e.target.value)}>
                         <option value='All'>All</option>                        
                         <option value='Bar'>Bar</option>

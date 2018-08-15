@@ -32,14 +32,10 @@ const Map = compose(
             {props.index === i &&
               <InfoWindow
               onCloseClick={props.openInfo}>
-                    <div className={classes.InfoWindow}>
-                        <img src={props.pics[i]} alt={item.name  + ' image' }/>
-                        <h5>
-                            {item.name}
-                        </h5>
-                        <h5>
-                            {item.address}
-                        </h5>
+                    <div aria-label='Venues images and address' className={classes.InfoWindow}>
+                        <img src={item.pic} alt={item.name  + ' image' }/>
+                        <h5>{item.name}</h5>
+                        <h5>{item.address}</h5>
                     </div>
               </InfoWindow>}
             </Marker>
