@@ -15,7 +15,7 @@ const Map = compose(
     withScriptjs,
     withGoogleMap
 )(props =>
-    <div classes={classes.MapContainer} tabIndex="0" aria-label="The map of Northern Athens" role="application">
+    <div classes={classes.MapContainer} aria-label="The map of Northern Athens" role="application">
     <GoogleMap
     
     defaultCenter = { { lat: 37.989747, lng: 23.729412 } }

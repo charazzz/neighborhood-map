@@ -5,9 +5,8 @@ import classes from './QueryInput.css';
 const queryInput = (props) => {
         return (
             <form className={classes.QueryForm}>
-            <div className={classes.QueryInput}>
-                <label htmlFor='location-select' className={classes.QueryLabel}>Search:
-                    <select className={classes.QuerySelect} onChange={(e) => props.queryHandler(e.target.value)}>
+                <label htmlFor='selectCategory' className={classes.QueryLabel}>Select Category of Venue:
+                    <select tabIndex='0' id='selectCategory' className={classes.QuerySelect} onChange={(e) => props.queryHandler(e.target.value)}>
                         <option value='All'>All</option>                        
                         <option value='Bar'>Bar</option>
                         <option value='Beach'>Beach bar</option>
@@ -17,8 +16,15 @@ const queryInput = (props) => {
                         <option value='Nightclub'>Nightclub</option>
                     </select>
                 </label>
-            </div>
+                <a 
+                    tabIndex='0' 
+                    onClick={props.focus}
+                    onKeyPress={(e) => { if (e.key === 'Enter') {
+                        props.focus(e)
+                    }}}
+                >Skip to main content</a>
             </form>
+            
         )
 }
 

@@ -1,3 +1,17 @@
 .Title {
     color: white;
+    
+}
+
+.Title h1 {
+    font-size: 32px;
+    display: inline;
+}
+
+.Title a {
+    position: absolute !important;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+    font-size: 0;
+    display: inline;
 }

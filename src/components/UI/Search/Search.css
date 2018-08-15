@@ -28,6 +28,30 @@ ul li {
   text-transform: capitalize;
 }
 
+.BtnCloseSidedrawer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 7px;
+  border: 0;
+  background: #999;
+  color: #fff;
+  border-radius: 3px;
+  font-size: 16px;
+}
+
+.BtnCloseSidedrawer:focus,
+.BtnCloseSidedrawer:hover {
+  background: #3794d1;
+}
+
+.ScreenReadersOnly {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+
 
 
 

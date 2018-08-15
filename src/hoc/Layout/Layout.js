@@ -24,14 +24,13 @@ class Layout extends PureComponent {
     
     componentDidMount() {
         this.init();
-        this.delayedShowMarker();       
+        this.delayedShowMarker();    
     }
 
     //**-------------------Main API Request Functions----------------**//
     //Initialize the app by fetching the venues and their info
     init = () => {
-        fetch('https://api.foursquare.com/v2/venues/search?ll=38.021294,%2023.798670&categoryId=4d4b7105d754a06376d81259&v=20150214&m=foursquare&client_secret=JVUFVZJ35JTNRIGL303QL4G0JSNXA00PWWRR4F5ZSPE2R4PO&client_id=1V340QFFYS0YJDOF01YIVZUYB5B1PB0RRL2G4FMS2ZMBNQFD')
-        //fetch('https://api.foursquare.com/v2/venues/search?ll=38.021294,%2023.798670&query=' + this.state.query + '&v=20150214&m=foursquare&client_secret=KVY52L0NEAPDUP2SKHEKGTA2NHFXIW2K0Z2WJ5RWLC1JBA5R&client_id=I3RA2YZX0YFD11IP3G4IVR4EXQDSIRZSNYECRH1KZIB1M4FN')
+        fetch('https://api.foursquare.com/v2/venues/search?ll=38.021294,%2023.798670&categoryId=4d4b7105d754a06376d81259&v=20150214&m=foursquare&client_secret=KVY52L0NEAPDUP2SKHEKGTA2NHFXIW2K0Z2WJ5RWLC1JBA5R&client_id=I3RA2YZX0YFD11IP3G4IVR4EXQDSIRZSNYECRH1KZIB1M4FN')
         
         .then(res => res.json() )
         .then(res => { 
@@ -78,7 +77,7 @@ class Layout extends PureComponent {
                 return pics.push(pic);
             })
             .catch(error => {
-                //alert('Sorry for the inconvenience. Can\'t fetch data');
+                //alert('Sorry for the inconvenience. Can\'t fetch photos');
                 console.log(error)
             });
             return this.setState({ pics })
@@ -105,13 +104,19 @@ class Layout extends PureComponent {
 
     //-----------SideDrawer Open & Close Handlers-------------//
     sideDrawerToggleHandler = () => {
-        this.setState( ( prevState ) => {
+          this.setState( ( prevState ) => {
             return { showSideDrawer: !prevState.showSideDrawer, index: null };
         } );
+
+        const searchInput = document.querySelector('#searchInput');
+        searchInput.focus();
     }
     
     sideDrawerClosedHandler = () => {
         this.setState( { showSideDrawer: false } );
+
+        const selectCategory = document.querySelector('#selectCategory');
+        selectCategory.focus();
     }//-----------SideDrawer Open & Close Handlers-------------//
 
 
@@ -155,13 +160,22 @@ class Layout extends PureComponent {
             this.setState({items: loggedMarkers});
         }
     }//------Update venue list and markers upon user's category selection-------//
+
+    //-------Skip to main button-Focus Fuunction----------//
+    mainContentBtnFocus = () => {
+            const mainBtnCnt = document.querySelector('#mainBtnCnt');
+            mainBtnCnt.focus();
+    }//-------Skip to main button-Focus Fuunction----------//
     
     render () {
         const google = window.google
         
         return (
             <Auxiliary>
-            <Toolbar drawerToggleClicked={this.sideDrawerToggleHandler} />
+            <Toolbar
+            drawerToggleClicked={this.sideDrawerToggleHandler}
+            focus={this.mainContentBtnFocus}
+            />
             <SideDrawer
             open={this.state.showSideDrawer}
             closed={this.sideDrawerClosedHandler} >
@@ -170,6 +184,7 @@ class Layout extends PureComponent {
                 items={this.state.items}
                 filterListHandler={this.filterListHandler}
                 listItemClickedHandler={this.listItemClickedHandler}
+                sideDrawerClosedHandler={this.sideDrawerClosedHandler}
                 /> }
                 </SideDrawer>
                 <main className={classes.Content}>
@@ -183,7 +198,9 @@ class Layout extends PureComponent {
                 />
                 </main>
                 <QueryInput
-                queryHandler={this.queryHandler} />
+                queryHandler={this.queryHandler}
+                focus={this.mainContentBtnFocus}
+                />
                 </Auxiliary>
             )
         }

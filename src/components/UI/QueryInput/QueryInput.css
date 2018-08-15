@@ -24,3 +24,11 @@
 .QuerySelect option {
     font-size: 12px;
 }
+
+a {
+    position: absolute !important;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+    font-size: 0;
+    display: inline;
+}

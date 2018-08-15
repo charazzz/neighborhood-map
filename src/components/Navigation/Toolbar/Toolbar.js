@@ -9,7 +9,7 @@ import classes from './Toolbar.css';
 const toolbar = ( props ) => (
     <header className={classes.Toolbar}>
         <DrawerToggle clicked={props.drawerToggleClicked} />
-        <Title />
+        <Title focus={props.focus}/>
         <div className={classes.Logo}>
             <Logo />
         </div>
