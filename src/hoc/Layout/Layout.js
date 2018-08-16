@@ -71,13 +71,13 @@ class Layout extends PureComponent {
                 let prefix = res.response.photos.items[0] ? res.response.photos.items[0].prefix : null;
                 let suffix = res.response.photos.items[0] ? res.response.photos.items[0].suffix : null;
                 pic = prefix ? prefix + '100x100' + suffix : NoImage;
-                return pic;
+                return m.pic = pic;
                 })
             .catch(error => {
                 //alert('Sorry for the inconvenience. Can\'t fetch photos');
                 console.log(error)
             });
-            return m.pic = pic;
+            return this.state.markers;
         })    
     }//**-------------------Main API Request Functions----------------**//
     
@@ -90,13 +90,13 @@ class Layout extends PureComponent {
     }//------Delay Markers so that the API info is fetched Handler------//
     
     
-    //--------InfoWindow Toggle Handler----------//
+    //--------InfoWindow Show/Hide Handler----------//
     toggleInfoHandler = (i) => {
         this.setState( prevState => {
             return { isMarkerClicked: !prevState.isMarkerClicked, index: i };
         } );
         this.delayedShowMarker();
-    } //--------InfoWindow Toggle Handler----------//
+    } //--------InfoWindow Show/Hide Handler----------//
     
     
     //-----------SideDrawer Open & Close Handlers-------------//

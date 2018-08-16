@@ -2,8 +2,8 @@ import React from 'react';
 import { compose, withProps } from 'recompose';
 import { withGoogleMap, GoogleMap, withScriptjs, Marker, InfoWindow } from 'react-google-maps';
 
+import NoImage from '../../assets/pictures/NoImage.png';
 import classes from './Map.css';
-
 
 const Map = compose(
     withProps ({
@@ -15,7 +15,7 @@ const Map = compose(
     withScriptjs,
     withGoogleMap
 )(props =>
-    <div classes={classes.MapContainer} aria-label="The map of Northern Athens" role="application">
+    <div classes={classes.MapContainer} aria-label="The map of Athens" role="application">
     <GoogleMap
     
     defaultCenter = { { lat: 37.989747, lng: 23.729412 } }
@@ -27,12 +27,12 @@ const Map = compose(
             key={item.id}
             onClick={() => props.openInfo(i) && props.fetchPhotosHandler}
             position={item.position}
-            icon={item.icon ? item.icon : null}
+            icon={item.icon ? item.icon : NoImage}
             animation={props.index === i ? props.google.maps.Animation.BOUNCE :  props.google.maps.Animation.DROP}>
             {props.index === i &&
               <InfoWindow
               onCloseClick={props.openInfo}>
-                    <div aria-label='Venues images and address' className={classes.InfoWindow}>
+                    <div aria-label='Venue image and address' className={classes.InfoWindow}>
                         <img src={item.pic} alt={item.name  + ' image' }/>
                         <h5>{item.name}</h5>
                         <h5>{item.address}</h5>
