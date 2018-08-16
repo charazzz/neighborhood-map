@@ -71,7 +71,6 @@ When a specific venue is clicked, either on the venues' list on the left or its 
 
 ## Authors
 
-    Udacity Team
     Chara Zogkou
     
 
@@ -90,7 +89,7 @@ http://udacity.github.io/frontend-nanodegree-styleguide/css.html
 http://udacity.github.io/frontend-nanodegree-styleguide/javascript.html
 
     Starting Code
-https://github.com/udacity/reactnd-project-myreads-starter
+No starting code is provided
 
 ## Credits
 
