@@ -89,7 +89,7 @@ http://udacity.github.io/frontend-nanodegree-styleguide/css.html
 http://udacity.github.io/frontend-nanodegree-styleguide/javascript.html
 
     Starting Code
-No starting code is provided
+No starting code was provided
 
 ## Credits
 
